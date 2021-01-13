@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">ShoeStore</string>
+    <string name="email">Email</string>
+    <string name="your_email">Your Email</string>
+    <string name="password">Password</string>
+    <string name="your_password">Your Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="what_do_we_got">What do we got?</string>
+    <string name="welcome_aboard">Welcome Aboard</string>
+    <string name="welcome_message">
+        Hey! We\'ve been expecting you.\n\nWe hope that you would find everything you\'re looking for.We got a stock full of different kinds of shoes for Man, Woman and Kids so that you don\'t have to wander around.\n\nIn any case, you can\'t find the one you\'re looking for then you\'re free to raise a request.We\'ll take care of you right away.
+    </string>
+    <string name="get_started">Get Started</string>
+    <string name="next">Next</string>
+    <string name="title_login_fragment">Login</string>
+    <string name="title_welcome_fragment">Welcome</string>
+    <string name="error_invalid_credentials">Authentication Failure</string>
+    <string name="message_valid_credentials">Authentication Success</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_store_fragment">Store</string>
+    <string name="title_add_shoe_fragment">Add Shoe</string>
+    <string name="instructions">Instructions</string>
+    <string name="instruction_content">1. Search for a shoe you found interesting.\n\n2. Click on it to look into the details.\n\n3. Complete the payment.\n\n4. Wear it and walk like a rock star.</string>
+    <string name="add_shoe_button">Add Shoe Button</string>
+    <string name="product_cover_image">Product Cover Image</string>
+    <string name="size">Size:</string>
+    <string name="title_instruction_fragment">Instructions</string>
+    <string name="logout">Logout</string>
+    <string name="title_shoe_details">Shoe Details</string>
 </resources>
