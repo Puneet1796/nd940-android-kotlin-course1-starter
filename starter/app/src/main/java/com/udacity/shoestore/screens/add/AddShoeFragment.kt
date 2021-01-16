@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.udacity.shoestore.MainViewModel
@@ -20,6 +21,7 @@ import com.udacity.shoestore.models.Shoe
 class AddShoeFragment : Fragment() {
     private lateinit var binding: AddShoeFragmentBinding
     private val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var viewModel: AddShoeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,31 +29,6 @@ class AddShoeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.add_shoe_fragment, container, false)
-
-        binding.submitShoeBtn.setOnClickListener { view ->
-            val shoeName = binding.valueShoeName.text.toString()
-            val shoeCompany = binding.valueShoeCompany.text.toString()
-            val shoeSize = binding.valueShoeSize.text.toString()
-            val shoeDescription = binding.valueShoeDescription.text.toString()
-
-            if (checkIfEmpty(shoeName, shoeCompany, shoeSize, shoeDescription)) {
-                Snackbar.make(view, "Please fill all the fields.", Snackbar.LENGTH_SHORT)
-                    .setAnchorView(view)
-                    .show()
-            } else {
-                mainViewModel.onShoeSubmit(
-                    Shoe(
-                        shoeName,
-                        if (shoeSize.isEmpty()) 0.0 else shoeSize.toDouble(),
-                        shoeCompany,
-                        shoeDescription,
-                        listOf()
-                    )
-                )
-                findNavController().navigateUp()
-            }
-        }
-
         return binding.root
     }
 
@@ -61,5 +38,41 @@ class AddShoeFragment : Fragment() {
                 return true
         }
         return false
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this)[AddShoeViewModel::class.java]
+
+        viewModel.eventClickNext.observe(viewLifecycleOwner) { hasPerformed ->
+            if (hasPerformed) {
+                val shoeName = binding.valueShoeName.text.toString()
+                val shoeCompany = binding.valueShoeCompany.text.toString()
+                val shoeSize = binding.valueShoeSize.text.toString()
+                val shoeDescription = binding.valueShoeDescription.text.toString()
+
+                if (checkIfEmpty(shoeName, shoeCompany, shoeSize, shoeDescription)) {
+                    Snackbar.make(
+                        requireView(),
+                        "Please fill all the fields.",
+                        Snackbar.LENGTH_SHORT
+                    )
+                        .setAnchorView(view)
+                        .show()
+                } else {
+                    mainViewModel.onShoeSubmit(
+                        Shoe(
+                            shoeName,
+                            if (shoeSize.isEmpty()) 0.0 else shoeSize.toDouble(),
+                            shoeCompany,
+                            shoeDescription,
+                            listOf()
+                        )
+                    )
+                    findNavController().navigateUp()
+                }
+                viewModel.onClickNextCompleted()
+            }
+        }
     }
 }

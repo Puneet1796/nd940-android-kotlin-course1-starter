@@ -4,23 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.R
+import com.udacity.shoestore.databinding.WelcomeFragmentBinding
 
 class WelcomeFragment : Fragment() {
+    private lateinit var viewModel: WelcomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.welcome_fragment, container, false)
-        view.findViewById<Button>(R.id.next_btn).setOnClickListener {
-            it.findNavController()
-                .navigate(R.id.action_welcomeFragment_to_instructionFragment)
+    ): View {
+        val binding: WelcomeFragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.welcome_fragment, container, false)
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this)[WelcomeViewModel::class.java]
+
+        viewModel.eventClickNext.observe(viewLifecycleOwner) { hasPerformed ->
+            if (hasPerformed) {
+                findNavController()
+                    .navigate(R.id.action_welcomeFragment_to_instructionFragment)
+                viewModel.onClickNextCompleted()
+            }
         }
-        return view
     }
 }
