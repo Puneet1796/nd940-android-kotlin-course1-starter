@@ -6,15 +6,125 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.udacity.shoestore.screens.details.ShoeDetailsViewModel" />
+            name="shoe"
+            type="com.udacity.shoestore.models.Shoe" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".screens.details.ShoeDetailsFragment">
+        android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_16dp"
+            tools:context=".screens.details.ShoeDetailsFragment">
+
+            <ImageView
+                android:id="@+id/shoe_image"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/description_field_height"
+                android:contentDescription="@string/product_cover_image"
+                android:paddingTop="36dp"
+                android:paddingBottom="36dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_trainers" />
+
+            <TextView
+                android:id="@+id/shoe_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@{shoe.name}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_image"
+                tools:text="Nike AirX" />
+
+            <View
+                android:id="@+id/shoe_name_underline"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/padding_64dp"
+                android:background="@color/blue"
+                app:layout_constraintEnd_toEndOf="@+id/shoe_name"
+                app:layout_constraintStart_toStartOf="@+id/shoe_name"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_name" />
+
+            <TextView
+                android:id="@+id/shoe_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{shoe.company}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@color/blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_company_title"
+                tools:text="Nike" />
+
+            <TextView
+                android:id="@+id/shoe_company_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/manufactured_by"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_name_underline" />
+
+            <TextView
+                android:id="@+id/shoe_size_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/available_sizes"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_company" />
+
+            <TextView
+                android:id="@+id/shoe_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{String.valueOf(shoe.size)}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@color/blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_size_title"
+                tools:text="8.0" />
+
+            <TextView
+                android:id="@+id/shoe_description_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/about_the_product"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_size" />
+
+            <TextView
+                android:id="@+id/shoe_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{shoe.description}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_description_title"
+                tools:text="Nike AirX is not to be taken lightly on the ground." />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </layout>

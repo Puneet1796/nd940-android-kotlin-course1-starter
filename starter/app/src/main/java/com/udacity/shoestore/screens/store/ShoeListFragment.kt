@@ -1,10 +1,8 @@
 package com.udacity.shoestore.screens.store
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -30,7 +28,21 @@ class ShoeListFragment : Fragment() {
     ): View {
         binding = DataBindingUtil
             .inflate(inflater, R.layout.shoe_list_fragment, container, false)
+
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.options_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_logout) {
+            mainViewModel.onLogoutSuccess()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -45,9 +57,11 @@ class ShoeListFragment : Fragment() {
 
     private fun populateData() {
         mainViewModel.listOfShoes.observe(viewLifecycleOwner) { listOfShoes ->
-//            if (listOfShoes.isEmpty()) {
-//            } else {
-//            }
+            if (listOfShoes.isEmpty()) {
+                binding.emptyView.visibility = View.VISIBLE
+            } else {
+                binding.emptyView.visibility = View.GONE
+            }
             binding.listContainer.removeAllViews()
             for (shoe in listOfShoes)
                 binding.listContainer.addView(

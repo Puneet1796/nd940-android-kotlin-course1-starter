@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/shoeListFragment"
         android:name="com.udacity.shoestore.screens.store.ShoeListFragment"
-        android:label="@string/title_store_fragment"
+        android:label="@string/title_shoe_list_fragment"
         tools:layout="@layout/shoe_list_fragment">
         <action
             android:id="@+id/action_shoeListFragment_to_addShoeFragment"
@@ -15,6 +15,11 @@
         <action
             android:id="@+id/action_shoeListFragment_to_shoeDetailsFragment"
             app:destination="@id/shoeDetailsFragment" />
+        <action
+            android:id="@+id/action_shoeListFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/shoeListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addShoeFragment"

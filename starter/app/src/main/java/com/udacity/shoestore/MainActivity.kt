@@ -23,11 +23,19 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host)
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.loginFragment, R.id.welcomeFragment,
-            R.id.shoeListFragment
-        ))
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.loginFragment, R.id.welcomeFragment,
+                R.id.shoeListFragment
+            )
+        )
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+
+        viewModel.eventLogin.observe(this) { isLoggedIn ->
+            if (!isLoggedIn) {
+                navController.navigate(R.id.action_shoeListFragment_to_loginFragment)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

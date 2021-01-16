@@ -30,9 +30,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_8dp"
+            android:background="@drawable/edit_text_bg"
             android:hint="@string/your_email"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
+            android:padding="@dimen/padding_12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email_label" />
@@ -52,13 +54,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@drawable/edit_text_bg"
             android:hint="@string/your_password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:padding="@dimen/padding_12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password_label"
-            tools:text="random123" />
+            app:layout_constraintTop_toBottomOf="@+id/password_label" />
 
         <Button
             android:id="@+id/login_btn"

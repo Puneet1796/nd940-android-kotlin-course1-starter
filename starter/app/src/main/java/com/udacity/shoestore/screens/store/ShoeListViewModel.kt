@@ -27,7 +27,7 @@ class ShoeListViewModel : ViewModel() {
     }
 
     fun onListItemClickComplete() {
-        _eventAddShoeButtonClick.value = null
+        _eventListItemClick.value = null
     }
 }
 

@@ -18,4 +18,16 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 
+    <style name="AddShoeTitleStyle">
+        <item name="android:alpha">0.7</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body1</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AddShoeTextFieldStyle">
+        <item name="android:background">@drawable/edit_text_bg</item>
+        <item name="android:ems">10</item>
+        <item name="android:padding">@dimen/padding_12dp</item>
+    </style>
+
 </resources>

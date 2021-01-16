@@ -25,6 +25,9 @@ class ShoeDetailsFragment : Fragment() {
         val binding: ShoeDetailsFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.shoe_details_fragment, container, false)
 
+        val shoe = ShoeDetailsFragmentArgs.fromBundle(requireArguments()).shoe
+        binding.shoe = shoe
+
         return binding.root
     }
 

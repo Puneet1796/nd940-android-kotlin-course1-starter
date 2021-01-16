@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.udacity.shoestore.MainViewModel
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.LoginFragmentBinding
@@ -40,7 +40,6 @@ class LoginFragment : Fragment() {
 
         viewModel.eventAuth.observe(viewLifecycleOwner) { isSuccess: Boolean ->
             if (isSuccess) {
-                onAuthSuccess()
                 mainViewModel.onLoginSuccess()
             } else {
                 onAuthError()
@@ -62,19 +61,11 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun onAuthSuccess() {
-        Toast.makeText(
-            requireContext(),
-            getString(R.string.message_valid_credentials),
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
     private fun onAuthError() {
-        Toast.makeText(
-            requireContext(),
+        Snackbar.make(
+            requireView(),
             getString(R.string.error_invalid_credentials),
-            Toast.LENGTH_SHORT
+            Snackbar.LENGTH_SHORT
         ).show()
     }
 
