@@ -51,7 +51,6 @@ class LoginFragment : Fragment() {
                 binding.emailField.text.toString(),
                 binding.passwordField.text.toString()
             )
-
         }
 
         mainViewModel.eventLogin.observe(viewLifecycleOwner) { isLoggedIn: Boolean ->

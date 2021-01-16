@@ -12,6 +12,7 @@ import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.WelcomeFragmentBinding
 
 class WelcomeFragment : Fragment() {
+    private lateinit var binding: WelcomeFragmentBinding
     private lateinit var viewModel: WelcomeViewModel
 
     override fun onCreateView(
@@ -19,7 +20,7 @@ class WelcomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: WelcomeFragmentBinding =
+        binding =
             DataBindingUtil.inflate(inflater, R.layout.welcome_fragment, container, false)
         return binding.root
     }
@@ -35,5 +36,7 @@ class WelcomeFragment : Fragment() {
                 viewModel.onClickNextCompleted()
             }
         }
+
+        binding.viewModel = viewModel
     }
 }

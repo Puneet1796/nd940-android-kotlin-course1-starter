@@ -13,13 +13,14 @@ import com.udacity.shoestore.databinding.InstructionFragmentBinding
 
 class InstructionFragment : Fragment() {
     private lateinit var viewModel: InstructionViewModel
+    private lateinit var binding: InstructionFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: InstructionFragmentBinding =
+        binding =
             DataBindingUtil.inflate(inflater, R.layout.instruction_fragment, container, false)
         return binding.root
     }
@@ -35,5 +36,7 @@ class InstructionFragment : Fragment() {
                 viewModel.onClickNextCompleted()
             }
         }
+
+        binding.viewModel = viewModel
     }
 }

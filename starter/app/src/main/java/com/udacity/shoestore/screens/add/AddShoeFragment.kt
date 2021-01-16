@@ -57,7 +57,7 @@ class AddShoeFragment : Fragment() {
                         "Please fill all the fields.",
                         Snackbar.LENGTH_SHORT
                     )
-                        .setAnchorView(view)
+                        .setAnchorView(binding.submitShoeBtn)
                         .show()
                 } else {
                     mainViewModel.onShoeSubmit(
@@ -74,5 +74,7 @@ class AddShoeFragment : Fragment() {
                 viewModel.onClickNextCompleted()
             }
         }
+
+        binding.viewModel = viewModel
     }
 }
