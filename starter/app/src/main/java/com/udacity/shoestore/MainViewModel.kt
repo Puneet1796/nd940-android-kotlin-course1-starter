@@ -33,5 +33,6 @@ class MainViewModel : ViewModel() {
 
     fun onLogoutSuccess() {
         _eventLogin.value = false
+        _listOfShoes.value = emptyList()
     }
 }

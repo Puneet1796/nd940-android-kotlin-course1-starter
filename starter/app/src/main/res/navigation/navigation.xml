@@ -11,13 +11,23 @@
         tools:layout="@layout/shoe_list_fragment">
         <action
             android:id="@+id/action_shoeListFragment_to_addShoeFragment"
-            app:destination="@id/addShoeFragment" />
+            app:destination="@id/addShoeFragment"
+            app:enterAnim="@anim/fade_and_slide_from_right"
+            app:exitAnim="@anim/fade_and_slide_to_left"
+            app:popEnterAnim="@anim/fade_and_slide_from_left"
+            app:popExitAnim="@anim/fade_and_slide_to_right" />
         <action
             android:id="@+id/action_shoeListFragment_to_shoeDetailsFragment"
-            app:destination="@id/shoeDetailsFragment" />
+            app:destination="@id/shoeDetailsFragment"
+            app:enterAnim="@anim/fade_and_slide_from_right"
+            app:exitAnim="@anim/fade_and_slide_to_left"
+            app:popEnterAnim="@anim/fade_and_slide_from_left"
+            app:popExitAnim="@anim/fade_and_slide_to_right" />
         <action
             android:id="@+id/action_shoeListFragment_to_loginFragment"
             app:destination="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
             app:popUpTo="@id/shoeListFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -34,6 +44,10 @@
         <action
             android:id="@+id/action_loginFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment"
+            app:enterAnim="@anim/fade_and_slide_from_right"
+            app:exitAnim="@anim/fade_and_slide_to_left"
+            app:popEnterAnim="@anim/fade_and_slide_from_left"
+            app:popExitAnim="@anim/fade_and_slide_to_right"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -44,7 +58,11 @@
         tools:layout="@layout/welcome_fragment">
         <action
             android:id="@+id/action_welcomeFragment_to_instructionFragment"
-            app:destination="@id/instructionFragment" />
+            app:destination="@id/instructionFragment"
+            app:enterAnim="@anim/fade_and_slide_from_right"
+            app:exitAnim="@anim/fade_and_slide_to_left"
+            app:popEnterAnim="@anim/fade_and_slide_from_left"
+            app:popExitAnim="@anim/fade_and_slide_to_right" />
     </fragment>
     <fragment
         android:id="@+id/instructionFragment"
@@ -54,6 +72,10 @@
         <action
             android:id="@+id/action_instructionFragment_to_storeFragment"
             app:destination="@id/shoeListFragment"
+            app:enterAnim="@anim/fade_and_slide_from_right"
+            app:exitAnim="@anim/fade_and_slide_to_left"
+            app:popEnterAnim="@anim/fade_and_slide_from_left"
+            app:popExitAnim="@anim/fade_and_slide_to_right"
             app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -64,6 +86,10 @@
         tools:layout="@layout/shoe_details_fragment">
         <argument
             android:name="shoe"
-            app:argType="com.udacity.shoestore.models.Shoe" />
+            app:argType="com.udacity.shoestore.models.Shoe"
+            app:enterAnim="@anim/fade_and_slide_from_right"
+            app:exitAnim="@anim/fade_and_slide_to_left"
+            app:popEnterAnim="@anim/fade_and_slide_from_left"
+            app:popExitAnim="@anim/fade_and_slide_to_right" />
     </fragment>
 </navigation>
