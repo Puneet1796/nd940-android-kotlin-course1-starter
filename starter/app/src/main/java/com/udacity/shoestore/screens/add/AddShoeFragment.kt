@@ -1,9 +1,12 @@
 package com.udacity.shoestore.screens.add
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -12,8 +15,10 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.udacity.shoestore.MainViewModel
 import com.udacity.shoestore.R
+import com.udacity.shoestore.databinding.AddImageListItemLayoutBinding
 import com.udacity.shoestore.databinding.AddShoeFragmentBinding
 import com.udacity.shoestore.models.Shoe
+
 
 /**
  * A simple [Fragment] class
@@ -32,26 +37,17 @@ class AddShoeFragment : Fragment() {
         return binding.root
     }
 
-    private fun checkIfEmpty(vararg values: String): Boolean {
-        for (value in values) {
-            if (value.isEmpty())
-                return true
-        }
-        return false
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this)[AddShoeViewModel::class.java]
+        val shoe = Shoe()
 
-        viewModel.eventClickNext.observe(viewLifecycleOwner) { hasPerformed ->
-            if (hasPerformed) {
-                val shoeName = binding.valueShoeName.text.toString()
-                val shoeCompany = binding.valueShoeCompany.text.toString()
-                val shoeSize = binding.valueShoeSize.text.toString()
-                val shoeDescription = binding.valueShoeDescription.text.toString()
-
-                if (checkIfEmpty(shoeName, shoeCompany, shoeSize, shoeDescription)) {
+        viewModel.eventClickSave.observe(viewLifecycleOwner) { isValid: Boolean? ->
+            if (isValid != null) {
+                if (isValid) {
+                    mainViewModel.onShoeSubmit(shoe)
+                    findNavController().navigateUp()
+                } else {
                     Snackbar.make(
                         requireView(),
                         "Please fill all the fields.",
@@ -59,22 +55,59 @@ class AddShoeFragment : Fragment() {
                     )
                         .setAnchorView(binding.submitShoeBtn)
                         .show()
-                } else {
-                    mainViewModel.onShoeSubmit(
-                        Shoe(
-                            shoeName,
-                            if (shoeSize.isEmpty()) 0.0 else shoeSize.toDouble(),
-                            shoeCompany,
-                            shoeDescription,
-                            listOf()
-                        )
-                    )
-                    findNavController().navigateUp()
                 }
-                viewModel.onClickNextCompleted()
+                viewModel.onClickSaveCompleted()
+            }
+        }
+
+        viewModel.eventAddImageLayout.observe(viewLifecycleOwner) { addedIndex: Int? ->
+            if (addedIndex != null) {
+                appendImageLayout(addedIndex)
+                viewModel.onAddImageLayoutComplete()
+            }
+        }
+
+        viewModel.eventRemoveImageLayout.observe(viewLifecycleOwner) { removedIndex: Int? ->
+            if (removedIndex != null) {
+                removeImageLayout(removedIndex)
+                viewModel.onRemoveImageLayoutComplete()
             }
         }
 
         binding.viewModel = viewModel
+        binding.shoe = shoe
+    }
+
+    private fun appendImageLayout(nextIndex: Int) {
+        val innerBinding: AddImageListItemLayoutBinding =
+            DataBindingUtil.inflate(
+                layoutInflater,
+                R.layout.add_image_list_item_layout,
+                binding.addImageList,
+                false
+            )
+
+        if (nextIndex > 0) {
+            val newLayoutParams = innerBinding.root.layoutParams as LinearLayout.LayoutParams
+            newLayoutParams.topMargin = 16.dpToPx()
+            innerBinding.root.layoutParams = newLayoutParams
+        }
+
+        binding.addImageList.addView(innerBinding.root, nextIndex)
+
+        innerBinding.index = nextIndex
+        innerBinding.viewModel = viewModel
+    }
+
+    private fun removeImageLayout(removedIndex: Int) {
+        binding.addImageList.removeViewAt(removedIndex)
+    }
+
+    private fun Int.dpToPx(): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_PX,
+            this.toFloat(),
+            resources.displayMetrics
+        ).toInt()
     }
 }

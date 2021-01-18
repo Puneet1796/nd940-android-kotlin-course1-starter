@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 1. Here I've used <layout> tag to get the null safe reference to the views.
 2. It lets you bind the listeners to the class reference defined in <variable>.
 -->
@@ -7,6 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <variable
+            name="shoe"
+            type="com.udacity.shoestore.models.Shoe" />
 
         <variable
             name="viewModel"
@@ -49,6 +52,7 @@
                     android:hint="@string/hint_shoe_name"
                     android:importantForAutofill="no"
                     android:inputType="text"
+                    android:text="@={shoe.name}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title_shoe_name" />
@@ -75,6 +79,7 @@
                     android:hint="@string/hint_shoe_company"
                     android:importantForAutofill="no"
                     android:inputType="text"
+                    android:text="@={shoe.company}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title_shoe_company" />
@@ -101,6 +106,7 @@
                     android:hint="@string/hint_shoe_size"
                     android:importantForAutofill="no"
                     android:inputType="number"
+                    android:text="@={`` + shoe.size}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title_shoe_size" />
@@ -128,9 +134,41 @@
                     android:hint="@string/hint_shoe_description"
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine"
+                    android:text="@={shoe.description}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title_shoe_description" />
+
+                <TextView
+                    android:id="@+id/title_shoe_images"
+                    style="@style/AddShoeTitleStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/shoe_images"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/value_shoe_description" />
+
+                <LinearLayout
+                    android:id="@+id/add_image_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/title_shoe_images" />
+
+                <Button
+                    android:id="@+id/add_image_btn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:onClick="@{() -> viewModel.onAddImageLayout()}"
+                    android:text="@string/add_more"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/add_image_list" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -143,7 +181,7 @@
             android:layout_marginEnd="@dimen/margin_16dp"
             android:layout_marginBottom="@dimen/margin_16dp"
             android:contentDescription="@string/add_shoe_button"
-            android:onClick="@{() -> viewModel.onClickNext()}"
+            android:onClick="@{() -> viewModel.onClickSave(shoe)}"
             android:text="@string/save"
             app:icon="@drawable/ic_baseline_save_24"
             app:layout_constraintBottom_toBottomOf="parent"

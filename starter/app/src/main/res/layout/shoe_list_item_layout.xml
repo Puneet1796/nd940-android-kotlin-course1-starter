@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 1. Here I've used <layout> tag to get the null safe reference to the views.
 2. It lets you bind the listeners and data to the class reference defined in <variable>
 to the views attributes like android:onClick or android:text.
@@ -29,27 +28,39 @@ to the views attributes like android:onClick or android:text.
             android:layout_height="match_parent"
             android:padding="@dimen/padding_16dp">
 
+            <ImageView
+                android:id="@+id/shoe_cover_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/product_cover_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/shoe_name"
+                app:layout_constraintHorizontal_weight="0.3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/shoe_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@{shoe.name}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:typeface="normal"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintBottom_toTopOf="@+id/shoe_company"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_weight="0.7"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/shoe_cover_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
                 tools:text="Nike Party Shoe L4" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/shoe_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -63,49 +74,50 @@ to the views attributes like android:onClick or android:text.
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:layout_constraintStart_toStartOf="@+id/shoe_size_title"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_size_title"
                 tools:text="Something about this product" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/shoe_company"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{shoe.company}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/blue"
                 android:typeface="normal"
-                app:layout_constraintBottom_toTopOf="@+id/textView4"
+                app:layout_constraintBottom_toTopOf="@+id/shoe_size_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintStart_toStartOf="@+id/shoe_name"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_name"
                 tools:text="Nike Inc." />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/shoe_size_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/size"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
-                app:layout_constraintStart_toStartOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintBottom_toTopOf="@+id/shoe_description"
+                app:layout_constraintStart_toStartOf="@+id/shoe_company"
+                app:layout_constraintTop_toBottomOf="@+id/shoe_company" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/shoe_size"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8dp"
                 android:text="@{String.valueOf(shoe.size)}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toTopOf="@+id/textView4"
+                app:layout_constraintStart_toEndOf="@+id/shoe_size_title"
+                app:layout_constraintTop_toTopOf="@+id/shoe_size_title"
                 tools:text="TextView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
 </layout>

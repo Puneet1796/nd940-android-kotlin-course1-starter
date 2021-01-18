@@ -41,4 +41,8 @@
     <string name="about_the_product">About the Product</string>
     <string name="product_cover_image">Product Cover Image</string>
     <string name="empty_text">No Shoes added.\nClick \"+ Add\" button to add a shoe.</string>
+    <string name="shoe_images">Shoe Images</string>
+    <string name="add_more">+ Add More</string>
+    <string name="paste_link">Paste link</string>
+    <string name="remove_image_button">Remove Image Button</string>
 </resources>
