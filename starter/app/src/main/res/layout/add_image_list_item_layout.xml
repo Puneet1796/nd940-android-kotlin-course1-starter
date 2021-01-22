@@ -5,6 +5,10 @@
     <data>
 
         <variable
+            name="shoe"
+            type="com.udacity.shoestore.models.Shoe" />
+
+        <variable
             name="index"
             type="int" />
 
@@ -28,7 +32,7 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:padding="@dimen/padding_12dp"
-            android:text="@={viewModel.shoe.images[index]}"
+            android:text="@={shoe.images[index]}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/remove_btn"
             app:layout_constraintHorizontal_bias="0.5"
@@ -40,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/remove_image_button"
-            android:onClick="@{() -> viewModel.onRemoveImageLayout(index)}"
+            android:onClick="@{(view) -> viewModel.onRemoveImageLayout(view)}"
             app:elevation="0dp"
             app:fabCustomSize="@dimen/remove_btn_size"
             app:layout_constraintBottom_toBottomOf="parent"

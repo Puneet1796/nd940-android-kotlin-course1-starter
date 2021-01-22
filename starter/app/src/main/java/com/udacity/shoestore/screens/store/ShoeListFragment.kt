@@ -2,11 +2,13 @@ package com.udacity.shoestore.screens.store
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.udacity.shoestore.MainViewModel
 import com.udacity.shoestore.R
 import com.udacity.shoestore.databinding.ShoeListFragmentBinding
@@ -97,6 +99,13 @@ class ShoeListFragment : Fragment() {
                 binding.listContainer,
                 false
             )
+
+        listItemBinding.shoeCoverImage.load(shoe.images[0]) {
+            crossfade(true)
+            placeholder(R.drawable.ic_trainers)
+            transformations(RoundedCornersTransformation(8f))
+        }
+
         listItemBinding.shoe = shoe
         listItemBinding.viewModel = viewModel
         return listItemBinding.root

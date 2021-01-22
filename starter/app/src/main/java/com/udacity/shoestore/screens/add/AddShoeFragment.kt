@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -62,14 +64,25 @@ class AddShoeFragment : Fragment() {
 
         viewModel.eventAddImageLayout.observe(viewLifecycleOwner) { addedIndex: Int? ->
             if (addedIndex != null) {
-                appendImageLayout(addedIndex)
+                appendImageLayout(shoe, addedIndex)
                 viewModel.onAddImageLayoutComplete()
             }
         }
 
-        viewModel.eventRemoveImageLayout.observe(viewLifecycleOwner) { removedIndex: Int? ->
-            if (removedIndex != null) {
-                removeImageLayout(removedIndex)
+        viewModel.eventRemoveImageLayout.observe(viewLifecycleOwner) { view: View? ->
+            if (view != null) {
+                val count = binding.addImageList.childCount
+                if (count == 1) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Product must have at least one image.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@observe
+                }
+                val index = binding.addImageList.children.indexOf(view.parent as ConstraintLayout)
+                removeImageLayout(index)
+                viewModel.removeImageAtIndex(index)
                 viewModel.onRemoveImageLayoutComplete()
             }
         }
@@ -78,7 +91,7 @@ class AddShoeFragment : Fragment() {
         binding.shoe = shoe
     }
 
-    private fun appendImageLayout(nextIndex: Int) {
+    private fun appendImageLayout(shoe: Shoe, nextIndex: Int) {
         val innerBinding: AddImageListItemLayoutBinding =
             DataBindingUtil.inflate(
                 layoutInflater,
@@ -95,6 +108,7 @@ class AddShoeFragment : Fragment() {
 
         binding.addImageList.addView(innerBinding.root, nextIndex)
 
+        innerBinding.shoe = shoe
         innerBinding.index = nextIndex
         innerBinding.viewModel = viewModel
     }

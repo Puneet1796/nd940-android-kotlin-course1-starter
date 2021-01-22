@@ -1,5 +1,6 @@
 package com.udacity.shoestore.screens.add
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +19,7 @@ class AddShoeViewModel : ViewModel() {
             shoe.company,
             shoe.size.toString(),
             shoe.description
-        )
+        ) && !checkIfValid(shoe.images)
     }
 
     fun onClickSaveCompleted() {
@@ -31,6 +32,10 @@ class AddShoeViewModel : ViewModel() {
                 return true
         }
         return false
+    }
+
+    private fun checkIfValid(list: List<String>): Boolean {
+        return list.isNotEmpty() && list.filter { it.isNotEmpty() }.count() > 1
     }
 
     private val _eventAddImageLayout = MutableLiveData(0)
@@ -46,15 +51,16 @@ class AddShoeViewModel : ViewModel() {
         _eventAddImageLayout.value = null
     }
 
-    private val _eventRemoveImageLayout = MutableLiveData<Int?>()
-    val eventRemoveImageLayout: LiveData<Int?>
+    private val _eventRemoveImageLayout = MutableLiveData<View?>()
+    val eventRemoveImageLayout: LiveData<View?>
         get() = _eventRemoveImageLayout
 
-    fun onRemoveImageLayout(index: Int?) {
-        if (index != null) {
-            shoe.images.removeAt(index)
-            _eventRemoveImageLayout.value = index
-        }
+    fun onRemoveImageLayout(view: View) {
+        _eventRemoveImageLayout.value = view
+    }
+
+    fun removeImageAtIndex(index: Int) {
+        shoe.images.removeAt(index)
     }
 
     fun onRemoveImageLayoutComplete() {
